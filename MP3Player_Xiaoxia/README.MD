@@ -17,7 +17,7 @@ Min Size 6 → ######Heading 6
 - Allows users to select and play an MP3 audio file
 (If you add four spaces or use a tab key, you will create an indented list.)
 	- On application start, the user can open a file dialog
-! [image](./images/File-Menu.png)
+![image](./images/File-Menu.png)
 
 
 [Reference article :what-is-readme-md-file](https://www.geeksforgeeks.org/what-is-readme-md-file/)
