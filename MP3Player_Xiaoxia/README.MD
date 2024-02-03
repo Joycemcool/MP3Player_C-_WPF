@@ -21,7 +21,9 @@ Min Size 6 → ######Heading 6
 ![image](./images/Open-File-dialog.png)
 
 - When an MP3 has been opened, the user can use either a menu option or toolbar buttons to control the music’s playback state (**Play**, **Pause** or **Stop**)
+
 ![image](./images/Media-Menu.png)
+
 ![image](./images/Now-Playing-screen.png)
 
 - After a song is selected, song **metadata** (such as Title, Artist, Album, Year) shall be displayed in a “Now Playing” screen. 
