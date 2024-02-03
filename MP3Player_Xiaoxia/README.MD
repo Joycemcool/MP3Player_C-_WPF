@@ -13,8 +13,10 @@ Size 5→ #####Heading 5
 Min Size 6 → ######Heading 6
 
 ### Discription
-*Allows users to select and play an MP3 audio file
-*On application start, the user can open a file dialog
+(-Just add a dash first and then write a text.)
+-Allows users to select and play an MP3 audio file
+	(If you add four spaces or use a tab key, you will create an indented list.)
+	-On application start, the user can open a file dialog
 ![image](./images/File-Menu.png)
 
 
