@@ -19,7 +19,7 @@ Min Size 6 → ######Heading 6
 
 
 	- On application start, the user can open a file dialog, browse to an MP3 audio file, and open it. 
-	![image](./images/Now-Playing-screen.png)
+	![image](./images/Open-File-dialog.png)
 	- 
 ![image](./images/File-Menu.png)
 
