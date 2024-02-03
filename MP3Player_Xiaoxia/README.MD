@@ -5,7 +5,7 @@ Strikethrough :- Can be typed between a pair of two Tilde → ~~text~~
 
 ## Project: MP3 Player - used XAML/C# to create a WPF application 
 
-Max size 1 → #Heading 1
+Max size 1 → # Heading 1
 Size 2 → ##Heading 2
 Size 3 → ###Heading 3
 Size 4 → ####Heading 4
@@ -13,7 +13,7 @@ Size 5→ #####Heading 5
 Min Size 6 → ######Heading 6
 
 ### Discription
-(-Just add a dash first and then write a text.)
+(-Just add a dash first and then write a text.Need a space follow the sign)
 - Allows users to select and play an MP3 audio file
 	(If you add four spaces or use a tab key, you will create an indented list.)
 	-On application start, the user can open a file dialog
