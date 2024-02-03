@@ -29,6 +29,7 @@ Min Size 6 → ######Heading 6
 - After a song is selected, song **metadata** (such as Title, Artist, Album, Year) shall be displayed in a “Now Playing” screen. 
 
 - Once a song has been selected, the user should be able to **toggle** the display between the “Now Playing” screen and a tag-editing screen.
+
 ![image](./images/Tag-Editor-screen.png)
 
 ### This project includes the following technical specs:
