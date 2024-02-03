@@ -21,6 +21,7 @@ Min Size 6 → ######Heading 6
 ![image](./images/Open-File-dialog.png)
 
 - When an MP3 has been opened, the user can use either a menu option or toolbar buttons to control the music’s playback state (**Play**, **Pause** or **Stop**)
+
 ![image](./images/Media-Menu.png)
 
 ![image](./images/Now-Playing-screen.png)
@@ -33,11 +34,24 @@ Min Size 6 → ######Heading 6
 
 ### This project includes the following technical specs:
 -   WPF application using XAML and C#.
--   Use CommandBindings for the media and application controls
+-   Use CommandBindings for the media and application controls (menu, button,
 -   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens)
 -   Use at least three layout managers to create an intuitive and flexible user interface.
+	- StackPanel, Grid,
 -   At minimum, the app should be able to read and write the following tag data: Song Title, Album, Year. Other tags can be used as desired.
 -   Implement reasonable exception handling to avoid program crashes.
 -   Note: The timer and progress slider shown in the screenshots are nice features to include, but optional.
 
 [Reference article :what-is-readme-md-file](https://www.geeksforgeeks.org/what-is-readme-md-file/)
+
+### Key words:
+- Windows Presentation Foundation (WPF) is a UI-rendering framework
+- XAML – Extensible Application Markup Language
+- 
+
+### Application developing steps:
+#### UI 
+- Main window, menu, select file and open (title can have an icon)
+- Progress bar, play, pause, stop
+- toggle side bar
+#### Backend function

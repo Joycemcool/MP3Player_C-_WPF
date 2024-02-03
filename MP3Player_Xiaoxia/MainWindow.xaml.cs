@@ -24,5 +24,10 @@ namespace MP3Player_Xiaoxia
         {
             InitializeComponent();
         }
+
+        private void MenuFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
