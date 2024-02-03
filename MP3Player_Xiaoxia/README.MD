@@ -15,8 +15,8 @@ Min Size 6 → ######Heading 6
 ### Discription
 (-Just add a dash first and then write a text.Need a space follow the sign)
 - Allows users to select and play an MP3 audio file
-	(If you add four spaces or use a tab key, you will create an indented list.)
-	-On application start, the user can open a file dialog
+(If you add four spaces or use a tab key, you will create an indented list.)
+	- On application start, the user can open a file dialog
 ![image](./images/File-Menu.png)
 
 
