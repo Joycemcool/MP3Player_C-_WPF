@@ -3,7 +3,7 @@ Italic text :- Can be typed between pair of Underscores → _text_
 Bold text :- Can be typed between a pair of two Asterisk → **text**
 Strikethrough :- Can be typed between a pair of two Tilde → ~~text~~
 
-#Project: MP3 Player - used XAML/C# to create a WPF application 
+##Project: MP3 Player - used XAML/C# to create a WPF application 
 
 Max size 1 → #Heading 1
 Size 2 → ##Heading 2
