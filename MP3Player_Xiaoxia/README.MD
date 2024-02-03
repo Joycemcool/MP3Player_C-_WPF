@@ -14,8 +14,7 @@ Min Size 6 → ######Heading 6
 
 ### Discription
 (-Just add a dash first and then write a text.Need a space follow the sign)
-- Allows users to select and play an MP3 audio file
-(If you add four spaces or use a tab key, you will create an indented list.)
+- Allows users to select and play an MP3 audio file(If you add four spaces or use a tab key, you will create an indented list.)
 ![image](./images/File-Menu.png)
 
 	- On application start, the user can open a file dialog, browse to an MP3 audio file, and open it. 
@@ -29,13 +28,12 @@ Min Size 6 → ######Heading 6
 
 ### This project includes the following technical specs:
 -   Test
-•	WPF application using XAML and C#.
-•	Use CommandBindings for the media and application controls
-•	Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens)
-•	Use at least three layout managers to create an intuitive and flexible user interface.
-•	At minimum, the app should be able to read and write the following tag data: Song Title, Album, Year. Other tags can be used as desired.
-•	Implement reasonable exception handling to avoid program crashes.
-•	Note: The timer and progress slider shown in the screenshots are nice features to include, but optional.
-
+-   WPF application using XAML and C#.
+-   Use CommandBindings for the media and application controls
+-   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens)
+-   Use at least three layout managers to create an intuitive and flexible user interface.
+-   At minimum, the app should be able to read and write the following tag data: Song Title, Album, Year. Other tags can be used as desired.
+-   Implement reasonable exception handling to avoid program crashes.
+-   Note: The timer and progress slider shown in the screenshots are nice features to include, but optional.
 
 [Reference article :what-is-readme-md-file](https://www.geeksforgeeks.org/what-is-readme-md-file/)
