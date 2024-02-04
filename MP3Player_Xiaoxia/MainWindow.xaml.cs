@@ -127,27 +127,25 @@ namespace MP3Player_Xiaoxia
         #region Properties
         private void Show_Properties(object sender, RoutedEventArgs e)
         {
-            //string MP3_Title = 
             var tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-            StringBuilder sb = new();
-            var tags = tfile.Tag.Title.ToString();
-            
-            sb.AppendLine(tags);    
+            var title = tfile.Tag.Title.ToString();
+            var album = tfile.Tag.Album.ToString();
+            var year = tfile.Tag.Year.ToString();
+            var genre = tfile.Tag.Genres.ToString();
+            Title.LblMetaHeader.Content = "Title";
+            Album.LblMetaHeader.Content = "Album";
+            Year.LblMetaHeader.Content = "Year";
+            Genre.LblMetaHeader.Content = "Genre";
+            Title.TextBoxMetaValue.Text = title;
+            Album.TextBoxMetaValue.Text = album;
+            Year.TextBoxMetaValue.Text = year;
+            Genre.TextBoxMetaValue.Text = genre;
 
-            sb.AppendLine("Duration: " + tfile.Properties.Duration.ToString(@"hh\:mm\:ss"));
 
-            if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Audio))
-            {
-                sb.AppendLine("Audio bitrate: " + tfile.Properties.AudioBitrate);
-                sb.AppendLine("Audio sample rate: " + tfile.Properties.AudioSampleRate);
-                sb.AppendLine("Audio channels: " + (tfile.Properties.AudioChannels == 1 ? "Mono" : "Stereo"));
-            }
+            //Image image = tfile.Tag.Picture;
+            //tfile.Save(); 
 
-            if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Video))
-            {
-                sb.AppendLine($"Video resolution: {tfile.Properties.VideoWidth} x {tfile.Properties.VideoHeight}");
-            }
-            TextBlockTags.Text = sb.ToString();
+
         }
 
         private void PropertiesBtn_Click(object sender, RoutedEventArgs e)

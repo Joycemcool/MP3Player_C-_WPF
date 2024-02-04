@@ -39,7 +39,7 @@ Min Size 6 → ######Heading 6
 ### This project includes the following technical specs:
 -   WPF application using XAML and C#.
 -   Use CommandBindings for the media and application controls (menu, button,label,textblock,
--   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens)
+-   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens, now playing)
 -   Use at least three layout managers to create an intuitive and flexible user interface.
 	- StackPanel, Grid,DockPanel
 -   At minimum, the app should be able to read and write the following tag data: Song Title, Album, Year. Other tags can be used as desired.
