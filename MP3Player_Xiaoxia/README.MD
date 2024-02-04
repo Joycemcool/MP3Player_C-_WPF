@@ -45,6 +45,8 @@ Min Size 6 → ######Heading 6
 [Reference article :what-is-readme-md-file](https://www.geeksforgeeks.org/what-is-readme-md-file/)
 
 [Reference tutorial :open-file-dialog](https://www.youtube.com/watch?v=Ks9bzPSx7Vs)
+[Reference tutorial :wpf-audio-player](https://www.youtube.com/watch?v=B0MXTryR5Cw)
+[Reference tutorial :Media Element In WPF](https://www.c-sharpcorner.com/UploadFile/dpatra/media-element-in-wpf/)
 ### Key words:
 - Windows Presentation Foundation (WPF) is a UI-rendering framework
 - XAML – Extensible Application Markup Language

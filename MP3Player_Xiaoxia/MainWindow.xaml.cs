@@ -21,6 +21,7 @@ namespace MP3Player_Xiaoxia
     /// </summary>
     public partial class MainWindow : Window
     {
+        string fileName;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,12 +42,36 @@ namespace MP3Player_Xiaoxia
             if(success == true) 
             {
                 string path = fileDialog.FileName;
-                string fileName = fileDialog.SafeFileName;
+                fileName = fileDialog.SafeFileName;
+                LblTest.Content = fileName;
+                Player.Source = new Uri(path);
+                BtnPlay.IsEnabled = true;
             }
             else
             {
                 //didn't pick a file
             }
         }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            Player.Play();
+        }
+
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            Player.Pause();
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            Player.Stop();
+        }
+
+
+
+        //Play and pause funcion
+
+
     }
 }
