@@ -74,7 +74,7 @@
                         </Button.Background>
                     </Button>
                     <Label x:Name="LblTime" Width="79" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,0,0" />
-                    <Slider x:Name="ProgressSlider" Width="325" Thumb.DragStarted="ProgressSlider_DragStarted" Thumb.DragCompleted="ProgressSlider_DragCompleted"  ValueChanged="ProgressSlider_ValueChanged" VerticalAlignment="Center"/>
+                    <Slider x:Name="ProgressSlider" Width="300" Thumb.DragStarted="ProgressSlider_DragStarted"  Thumb.DragCompleted="ProgressSlider_DragCompleted_1" ValueChanged="ProgressSlider_ValueChanged" VerticalAlignment="Center"/>
 
                 </DockPanel>
             </Border>
@@ -89,7 +89,7 @@
                 </MediaElement>
             </StackPanel>
             <StackPanel x:Name="TextBlockMetaData" Grid.Column="1" Margin="50 150 50 80">
-                <TextBlock Text="Hello World"/>
+                <TextBlock x:Name="TextBlockTags" Text="Hello World"/>
             </StackPanel>
 
 

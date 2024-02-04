@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="TagLibSharp" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="edit.png" />
     <Resource Include="media-play.png" />
     <Resource Include="musicnote.png" />

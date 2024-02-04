@@ -32,6 +32,10 @@ Min Size 6 → ######Heading 6
 
 ![image](./images/Tag-Editor-screen.png)
 
+### Precondition
+- Install TagLibSharp in NuGet Manager 
+- Taglib is a library for reading and editing audio metadata, commonly known as tags.
+
 ### This project includes the following technical specs:
 -   WPF application using XAML and C#.
 -   Use CommandBindings for the media and application controls (menu, button,label,textblock,
