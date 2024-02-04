@@ -35,7 +35,7 @@
                 <ColumnDefinition Width="711*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Background="#FF98E0CE">
-                <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60">
+                <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60" Click="BtnFile_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/open_file.png" Stretch="Fill"/>
                     </Button.Background>
@@ -47,8 +47,9 @@
                 </Button>
                 <Button x:Name="BtnEdit" BorderBrush="{x:Null}" Height="60" >
                     <Button.Background>
-                        <ImageBrush ImageSource="/images/edit.png"/>
+                        <ImageBrush ImageSource="/edit.png"/>
                     </Button.Background>
+
                 </Button>
 
             </StackPanel>
@@ -62,21 +63,23 @@
                     </Button>
                     <Button Width="60" >
                         <Button.Background>
-                            <ImageBrush ImageSource="/images/pause-icon.png"/>
+                            <ImageBrush ImageSource="/pause-icon.png"/>
                         </Button.Background>
+
                     </Button>
                     <Button Width="49" >
                         <Button.Background>
                             <ImageBrush ImageSource="/stop-icon.png"/>
                         </Button.Background>
                     </Button>
+                    <Label Width="79" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,0,0" ></Label>
+                    <Slider Width="494" VerticalAlignment="Center"/>
 
                 </StackPanel>
             </Border>
             <MediaElement HorizontalAlignment="Left" Height="366" Margin="0,-14,0,0" VerticalAlignment="Top" Width="698" Grid.Column="1"/>
 
         </Grid>
-        <!--<MediaElement x:Name="MediaPlayer" Grid.RowSpan="1" LoadedBehavior="Manual"/>-->
 
 
 

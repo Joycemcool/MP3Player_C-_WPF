@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,24 @@ namespace MP3Player_Xiaoxia
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "MP3 Source Files | *.mp3";
+            fileDialog.Title = "Pick a MP3 file";
+            fileDialog.Multiselect = false;
+            bool? success = fileDialog.ShowDialog();
+            if(success == true) 
+            {
+                string path = fileDialog.FileName;
+                string fileName = fileDialog.SafeFileName;
+            }
+            else
+            {
+                //didn't pick a file
+            }
         }
     }
 }

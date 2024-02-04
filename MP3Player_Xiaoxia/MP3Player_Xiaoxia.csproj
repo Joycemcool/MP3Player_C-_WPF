@@ -8,11 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="edit.png" />
+    <None Remove="media-play.png" />
+    <None Remove="musicnote.png" />
     <None Remove="open_file.png" />
+    <None Remove="pause-icon.png" />
+    <None Remove="stop-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="edit.png" />
+    <Resource Include="media-play.png" />
+    <Resource Include="musicnote.png" />
     <Resource Include="open_file.png" />
+    <Resource Include="pause-icon.png" />
+    <Resource Include="stop-icon.png" />
   </ItemGroup>
 
 </Project>
