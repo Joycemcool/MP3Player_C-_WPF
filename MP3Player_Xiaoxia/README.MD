@@ -34,10 +34,10 @@ Min Size 6 → ######Heading 6
 
 ### This project includes the following technical specs:
 -   WPF application using XAML and C#.
--   Use CommandBindings for the media and application controls (menu, button,
+-   Use CommandBindings for the media and application controls (menu, button,label,textblock,
 -   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens)
 -   Use at least three layout managers to create an intuitive and flexible user interface.
-	- StackPanel, Grid,
+	- StackPanel, Grid,DockPanel
 -   At minimum, the app should be able to read and write the following tag data: Song Title, Album, Year. Other tags can be used as desired.
 -   Implement reasonable exception handling to avoid program crashes.
 -   Note: The timer and progress slider shown in the screenshots are nice features to include, but optional.
@@ -47,6 +47,7 @@ Min Size 6 → ######Heading 6
 [Reference tutorial :open-file-dialog](https://www.youtube.com/watch?v=Ks9bzPSx7Vs)
 [Reference tutorial :wpf-audio-player](https://www.youtube.com/watch?v=B0MXTryR5Cw)
 [Reference tutorial :Media Element In WPF](https://www.c-sharpcorner.com/UploadFile/dpatra/media-element-in-wpf/)
+[Reference tutorial :Media Player with File Metadata](https://www.youtube.com/watch?v=jARmuKSRsio)
 ### Key words:
 - Windows Presentation Foundation (WPF) is a UI-rendering framework
 - XAML – Extensible Application Markup Language
@@ -57,4 +58,8 @@ Min Size 6 → ######Heading 6
 - Main window, menu, select file and open (title can have an icon)
 - Progress bar, play, pause, stop
 - toggle side bar
+- spend 30 minutes figure out why border doesn't match stackpanel size
 #### Backend function
+- open file dialogg(disable buttons if no file selected, if stop, need to select file again)
+- play, pause, stop function
+- Thumb.DragCompleted="ProgressSlider_DragCompleted" not working
