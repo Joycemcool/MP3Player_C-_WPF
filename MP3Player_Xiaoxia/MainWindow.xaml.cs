@@ -26,8 +26,7 @@ namespace MP3Player_Xiaoxia
         string? fileName;
         private bool isPlaying=false;
         private bool isUserDraggingSlider=false;
-        
-        
+                
         private readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(0.1) };
         private readonly OpenFileDialog MediaOpenDialog = new()
         {
@@ -38,18 +37,21 @@ namespace MP3Player_Xiaoxia
         {
             InitializeComponent();
 
-            timer.Tick += Timer_Tick;
-            timer.Start();
+        }
+
+        private void BtnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new NowPlaying();
         }
         //update slider value by seconds, if file been loaded, the duration of the file is awailable and the user isn't ragging he slider.
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            if (Player.Source != null && Player.NaturalDuration.HasTimeSpan && !isUserDraggingSlider)
-            {
-                ProgressSlider.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
-                ProgressSlider.Value = Player.Position.TotalSeconds;
-            }
-        }
+        //private void Timer_Tick(object? sender, EventArgs e)
+        //{
+        //    if (Player.Source != null && Player.NaturalDuration.HasTimeSpan && !isUserDraggingSlider)
+        //    {
+        //        ProgressSlider.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
+        //        ProgressSlider.Value = Player.Position.TotalSeconds;
+        //    }
+        //}
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -61,119 +63,23 @@ namespace MP3Player_Xiaoxia
 
             MediaOpenDialog.Multiselect = false;
             bool? success = MediaOpenDialog.ShowDialog();
-            if(success == true) 
+            if (success == true)
             {
                 string path = MediaOpenDialog.FileName;
                 fileName = MediaOpenDialog.SafeFileName;
-                LblTest.Content = fileName;
-                Player.Source = new Uri(path);
-                BtnPlay.IsEnabled = true;
-                Player.Play();
-                Show_Properties(sender, e);
             }
             else
             {
                 //didn't pick a file
             }
         }
-        #region Media Controls
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(Player?.Source != null)
-            {
-                Player.Play();
-                isPlaying = true;
-                //need a default value for label
-            }
-
+            CC.Content = new EditTags();
         }
+        //#region Media Controls
 
-        private void btnPause_Click(object sender, RoutedEventArgs e)
-        {
-            Player.Pause();
-            isPlaying = false;
-        }
-
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            Player.Stop();
-            isPlaying = false;
-        }
-
-        private void ProgressSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-                isUserDraggingSlider = true;                
-        }
-        //why this method doesn't work
-        private void ProgressSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-            isUserDraggingSlider = false;
-            Player.Position = TimeSpan.FromSeconds(ProgressSlider.Value);
-        }
-        private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            LblTime.Content = TimeSpan.FromSeconds(ProgressSlider.Value).ToString(@"hh\:mm\:ss");
-       
-        }
-
-        private void ProgressSlider_DragCompleted_1(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            isUserDraggingSlider = false;
-            Player.Position = TimeSpan.FromSeconds(ProgressSlider.Value);
-        }
-
-        //Play and pause funcion
-        #endregion
-        #region Properties
-        private void Show_Properties(object sender, RoutedEventArgs e)
-        {
-            var tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-            var title = tfile.Tag.Title.ToString();
-            var album = tfile.Tag.Album.ToString();
-            var year = tfile.Tag.Year.ToString();
-            var genre = tfile.Tag.Genres.ToString();
-            Title.LblMetaHeader.Content = "Title";
-            Album.LblMetaHeader.Content = "Album";
-            Year.LblMetaHeader.Content = "Year";
-            Genre.LblMetaHeader.Content = "Genre";
-            Title.TextBoxMetaValue.Text = title;
-            Album.TextBoxMetaValue.Text = album;
-            Year.TextBoxMetaValue.Text = year;
-            Genre.TextBoxMetaValue.Text = genre;
-
-
-            //Image image = tfile.Tag.Picture;
-            //tfile.Save(); 
-
-
-        }
-
-        private void PropertiesBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (MediaOpenDialog.FileName != "")
-            {
-                var tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-                StringBuilder sb = new();
-
-                sb.AppendLine("Duration: " + tfile.Properties.Duration.ToString(@"hh\:mm\:ss"));
-
-                if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Audio))
-                {
-                    sb.AppendLine("Audio bitrate: " + tfile.Properties.AudioBitrate);
-                    sb.AppendLine("Audio sample rate: " + tfile.Properties.AudioSampleRate);
-                    sb.AppendLine("Audio channels: " + (tfile.Properties.AudioChannels == 1 ? "Mono" : "Stereo"));
-                }
-
-                if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Video))
-                {
-                    sb.AppendLine($"Video resolution: {tfile.Properties.VideoWidth} x {tfile.Properties.VideoHeight}");
-                }
-
-                MessageBox.Show(sb.ToString(), "Properties");
-            }
-        }
-
-        #endregion
 
     }
 }

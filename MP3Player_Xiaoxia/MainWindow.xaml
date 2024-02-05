@@ -6,105 +6,58 @@
         xmlns:local="clr-namespace:MP3Player_Xiaoxia"
         mc:Ignorable="d"
         Title="Xiaoxia MP3 Player" Height="460" Width="764">
-    <StackPanel>
+    <StackPanel Orientation="Vertical">
 
-        <Menu x:Name="menu" Height="33" HorizontalAlignment="Left" Width="800">
-            <MenuItem x:Name="MenuFile" Header="File" Width="60" Margin="5" Click="MenuFile_Click">
-                <MenuItem x:Name="MenuItemOpen" Header="Open MP3" />
-                <Separator />
-                <MenuItem Header="Tag Current MP3" />
-                <Separator />
-                <MenuItem Header="Exit" />
-            </MenuItem>
-            <MenuItem Header="Edit" Width="60" Margin="5">
-                <MenuItem Header="Edit" />
-            </MenuItem>
-            <MenuItem Header="Media" Width="60" Margin="5">
-                <MenuItem Header="Play" />
-                <Separator />
-                <MenuItem Header="Pause" />
-                <Separator />
-                <MenuItem Header="Stop" />
-            </MenuItem>
-        </Menu>
-        <Grid Width="724">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="400"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="SideBar" Width="81*" />
-                <ColumnDefinition Width="391*"/>
-                <ColumnDefinition Width="252*"/>
-
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" Margin="60 100 ">
-                <local:EditMetaDataControl x:Name="Title" HorizontalAlignment="Left" VerticalAlignment="Top"></local:EditMetaDataControl>
-                <local:EditMetaDataControl  x:Name="Album" HorizontalAlignment="Left" VerticalAlignment="Top"></local:EditMetaDataControl>
-                <local:EditMetaDataControl  x:Name="Year" HorizontalAlignment="Left" VerticalAlignment="Top"></local:EditMetaDataControl>
-                <local:EditMetaDataControl  x:Name="Genre" HorizontalAlignment="Left" VerticalAlignment="Top"></local:EditMetaDataControl>
-            </StackPanel>
-
-            <StackPanel Grid.Column="0" Background="#FF98E0CE" Grid.ColumnSpan="2" Margin="0,0,391,0">
-                <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60" Click="BtnFile_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/open_file.png" Stretch="Fill"/>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="BtnPlay" BorderBrush="{x:Null}" Height="60" >
-                    <Button.Background>
-                        <ImageBrush ImageSource="/musicnote.png"/>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="BtnEdit" Content="" BorderBrush="{x:Null}" Height="60" >
-                    <Button.Background>
-                        <ImageBrush ImageSource="/edit.png"/>
-                    </Button.Background>
-
-                </Button>
-                <Label x:Name="LblTest" Content="Label"/>
-
-            </StackPanel>
-
-            <Border x:Name="BorderBtns" BorderBrush="Black" BorderThickness="1" Height="Auto" Grid.Column="1" Margin="10,333,0,10" HorizontalAlignment="Left" Width="Auto"  RenderTransformOrigin="0.505,0.274" Grid.ColumnSpan="2">
-                <DockPanel x:Name="PlayPanel" Grid.Column ="1" Background="#FF0096B3" HorizontalAlignment="Left" Width="598" Height="55" VerticalAlignment="Center" >
-                    <Button x:Name="btnPlay"  Width="60" HorizontalAlignment="Left" Click="btnPlay_Click" >
+        <StackPanel HorizontalAlignment="Left">
+            <Menu x:Name="menu" Height="33" HorizontalAlignment="Left" Width="800">
+                <MenuItem x:Name="MenuFile" Header="File" Width="60" Margin="5" Click="MenuFile_Click">
+                    <MenuItem x:Name="MenuItemOpen" Header="Open MP3" />
+                    <Separator />
+                    <MenuItem Header="Tag Current MP3" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+                <MenuItem Header="Edit" Width="60" Margin="5">
+                    <MenuItem Header="Edit" />
+                </MenuItem>
+                <MenuItem Header="Media" Width="60" Margin="5">
+                    <MenuItem Header="Play" />
+                    <Separator />
+                    <MenuItem Header="Pause" />
+                    <Separator />
+                    <MenuItem Header="Stop" />
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Background="#FF98E0CE" Height="406" Width="111" HorizontalAlignment="Left">
+                    <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60" Click="BtnFile_Click">
                         <Button.Background>
-                            <ImageBrush ImageSource="/media-play.png"/>
+                            <ImageBrush ImageSource="/open_file.png" Stretch="Fill"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="btnPause" Width="60" Click="btnPause_Click"  >
+                    <Button x:Name="BtnPlay" BorderBrush="{x:Null}" Height="60" Click="BtnPlay_Click" >
                         <Button.Background>
-                            <ImageBrush ImageSource="/pause-icon.png"/>
+                            <ImageBrush ImageSource="/musicnote.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnEdit" Content="" BorderBrush="{x:Null}" Height="60" Click="BtnEdit_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/edit.png"/>
                         </Button.Background>
 
                     </Button>
-                    <Button x:Name="btnStop" Width="49" Click="btnStop_Click" >
-                        <Button.Background>
-                            <ImageBrush ImageSource="/stop-icon.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Label x:Name="LblTime" Width="79" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,0,0" />
-                    <Slider x:Name="ProgressSlider" Width="300" Thumb.DragStarted="ProgressSlider_DragStarted"  Thumb.DragCompleted="ProgressSlider_DragCompleted_1" ValueChanged="ProgressSlider_ValueChanged" VerticalAlignment="Center"/>
+                    <Label x:Name="LblTest" Content="Label"/>
 
-                </DockPanel>
-            </Border>
-            <StackPanel Grid.ColumnSpan="2" Margin="0,0,391,0">
-                <MediaElement x:Name="Player" LoadedBehavior="Manual"  HorizontalAlignment="Stretch" Height="258" Margin="0,10,0,0" Width="453" Grid.Column="1">
-                    <MediaElement.OpacityMask>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black"/>
-                            <GradientStop Color="#FF3C2C2C" Offset="1"/>
-                        </LinearGradientBrush>
-                    </MediaElement.OpacityMask>
-                </MediaElement>
             </StackPanel>
-
-        </Grid>
-
-
-
-
+            <!--<StackPanel>
+                <Label Content="right"></Label>
+            </StackPanel>-->
+            <ContentControl x:Name="CC"></ContentControl>
+        </StackPanel>
+        
     </StackPanel>
+
 
 </Window>
 

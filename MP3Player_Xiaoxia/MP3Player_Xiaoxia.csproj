@@ -14,6 +14,7 @@
     <None Remove="open_file.png" />
     <None Remove="pause-icon.png" />
     <None Remove="stop-icon.png" />
+    <None Remove="Tailor.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
     <Resource Include="open_file.png" />
     <Resource Include="pause-icon.png" />
     <Resource Include="stop-icon.png" />
+    <Resource Include="Tailor.jpg" />
   </ItemGroup>
 
 </Project>

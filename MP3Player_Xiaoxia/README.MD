@@ -52,6 +52,8 @@ Min Size 6 → ######Heading 6
 [Reference tutorial :wpf-audio-player](https://www.youtube.com/watch?v=B0MXTryR5Cw)
 [Reference tutorial :Media Element In WPF](https://www.c-sharpcorner.com/UploadFile/dpatra/media-element-in-wpf/)
 [Reference tutorial :Media Player with File Metadata](https://www.youtube.com/watch?v=jARmuKSRsio)
+[Reference stackoverflow:Media Player with File Metadata](https://stackoverflow.com/questions/50437358/c-sharp-taglib-set-album-cover-for-mp3)
+[Reference tutorial : WPF | Sidebar, multi Window Navigation](https://www.youtube.com/watch?v=FACL4eTZ8uA&t=844s)
 ### Key words:
 - Windows Presentation Foundation (WPF) is a UI-rendering framework
 - XAML – Extensible Application Markup Language
