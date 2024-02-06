@@ -78,19 +78,17 @@ namespace MP3Player_Xiaoxia
             {
                 filePath = MediaOpenDialog.FileName;
                 fileName = MediaOpenDialog.SafeFileName;
-                Player.Source = new Uri(filePath);
-                Player.Play();
                 nowPlaying = new NowPlaying();
                 CC.Content = nowPlaying;
                 PlayPanel.Visibility = Visibility.Visible;
 
                 Get_Tags(sender, e);
-                if(mp3Title != null)
+                if (mp3Title != null)
                 {
                     nowPlaying.Title.TagValue.Content = mp3Title;
                 }
 
-
+                btnPlay_Click(sender, e);
 
             }
             else
@@ -120,12 +118,13 @@ namespace MP3Player_Xiaoxia
         #region Media Controls
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (Player?.Source != null)
-            {
+
+            Player.Source = new Uri(filePath);
+
                 Player.Play();
                 isPlaying = true;
                 //need a default value for label
-            }
+
         }
 
         private void btnPause_Click(object sender, RoutedEventArgs e)
