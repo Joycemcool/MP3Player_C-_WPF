@@ -5,11 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MP3Player_Xiaoxia"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="176,0,0,8" Background="#FFFBE8E8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
-        </Grid.RowDefinitions>
-        <local:EditMetaDataControl></local:EditMetaDataControl>
+             d:DesignHeight="358" d:DesignWidth="482">
+    <Grid  Background="#FFFBE8E8"  >
+        <local:EditMetaDataControl x:Name="Title"  Margin="30,88,29,159"></local:EditMetaDataControl>
     </Grid>
 </UserControl>

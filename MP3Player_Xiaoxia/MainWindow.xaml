@@ -49,6 +49,7 @@
 
                 </Button>
                 <Label x:Name="LblTest" Content="Label"/>
+                <Button Content="Button" Click="Button_Click_1"/>
 
             </StackPanel>
             <!--<StackPanel>

@@ -27,9 +27,14 @@ namespace MP3Player_Xiaoxia
     {
         string? fileName;
         string? filePath;
+        private TagLib.File tfile;
+        string? mp3Title;
+        string? album;
+        string? year;
         private bool isPlaying=false;
         private bool isUserDraggingSlider=false;
         private NowPlaying nowPlaying;
+        private EditTags editTags;
                 
         private readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(0.1) };
         private readonly OpenFileDialog MediaOpenDialog = new()
@@ -57,6 +62,13 @@ namespace MP3Player_Xiaoxia
             BtnFile_Click(sender, e);
         }
 
+        private void Get_Tags(object sender, RoutedEventArgs e)
+        {
+            tfile = TagLib.File.Create(MediaOpenDialog.FileName);
+            //tfile = TagLib.File.Create(@"C:\Users\joyce\Documents\ComeAlive.mp3");
+       
+            mp3Title = tfile.Tag.Title.ToString();
+        }
         private void BtnFile_Click(object sender, RoutedEventArgs e)
         {
 
@@ -71,6 +83,15 @@ namespace MP3Player_Xiaoxia
                 nowPlaying = new NowPlaying();
                 CC.Content = nowPlaying;
                 PlayPanel.Visibility = Visibility.Visible;
+
+                Get_Tags(sender, e);
+                if(mp3Title != null)
+                {
+                    nowPlaying.Title.TagValue.Content = mp3Title;
+                }
+
+
+
             }
             else
             {
@@ -80,7 +101,10 @@ namespace MP3Player_Xiaoxia
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            CC.Content = new EditTags();
+            Player.Stop();
+            editTags = new EditTags();
+            CC.Content = editTags;
+            tfile.Dispose( );
         }
         //#region Media Controls
 
@@ -179,6 +203,18 @@ namespace MP3Player_Xiaoxia
 
                 MessageBox.Show(sb.ToString(), "Properties");
             }
+        }
+
+
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Player.Stop();
+            
+            Player.Source=null;
+            mp3Title = editTags.Title.TextBoxMetaValue.Text.ToString();
+            tfile.Tag.Title = mp3Title;
+            tfile.Save();
         }
     }
 }
