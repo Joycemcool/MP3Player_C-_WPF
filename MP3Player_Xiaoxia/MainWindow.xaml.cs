@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -30,7 +31,7 @@ namespace MP3Player_Xiaoxia
         private TagLib.File tfile;
         string? mp3Title;
         string? album;
-        string? year;
+        string year;
         private bool isPlaying=false;
         private bool isUserDraggingSlider=false;
         private NowPlaying nowPlaying;
@@ -55,6 +56,7 @@ namespace MP3Player_Xiaoxia
         {
  
             CC.Content = nowPlaying;
+            BtnSaveTags.Visibility = Visibility.Visible;
             nowPlaying.Title.TagHeader.Content = "Title";
             nowPlaying.Album.TagHeader.Content = "Album";
             nowPlaying.Year.TagHeader.Content = "Year";
@@ -82,6 +84,7 @@ namespace MP3Player_Xiaoxia
 
         private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            BtnSaveTags.Visibility = Visibility.Hidden;
             MediaOpenDialog.Multiselect = false;
             bool? success = MediaOpenDialog.ShowDialog();
             if (success == true)
@@ -108,11 +111,12 @@ namespace MP3Player_Xiaoxia
 
         private void CanPlayMedia(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (Player != null) && (Player.Source != null) ;
+            e.CanExecute = (Player != null) && (Player.Source != null);
         }
 
         private void PlayMedia(object sender, ExecutedRoutedEventArgs e)
         {
+            BtnSaveTags.Visibility= Visibility.Hidden;
             Player.Play();
             isPlaying = true;
             nowPlaying.Title.TagHeader.Content = "Title";
@@ -126,6 +130,7 @@ namespace MP3Player_Xiaoxia
         private void CanPauseMedia(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = isPlaying;
+            //e.CanExecute= true;
         }
 
         private void PauseMedia(object sender, ExecutedRoutedEventArgs e)
@@ -137,6 +142,7 @@ namespace MP3Player_Xiaoxia
         private void CanStopMedia(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = isPlaying;
+            //e.CanExecute = true;
         }
 
         private void StopMedia(object sender, ExecutedRoutedEventArgs e)
@@ -148,6 +154,8 @@ namespace MP3Player_Xiaoxia
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             Player.Stop();
+            PlayPanel.Visibility= Visibility.Hidden;
+            isPlaying = false;
             Player.Source = null;
             editTags = new EditTags();
             BtnSaveTags.Visibility = Visibility.Visible;
@@ -196,12 +204,16 @@ namespace MP3Player_Xiaoxia
         }
 
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void BtnSaveTags_Click(object sender, RoutedEventArgs e)
         {
             mp3Title = editTags.Title.TagValue.Text.ToString();
-            if(mp3Title.Length > 0)
+            album = editTags.Album.TagValue.Text.ToString();
+            year = editTags.Year.TagValue.Text.ToString();
+            if (mp3Title.Length > 0 || album.Length >0 || year !=null)
             {
                 tfile.Tag.Title = mp3Title;
+                tfile.Tag.Album = album;
+                tfile.Tag.Year = UInt32.Parse(year);
                 tfile.Save();
             }
 
@@ -212,9 +224,15 @@ namespace MP3Player_Xiaoxia
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuEdit_Click(object sender, RoutedEventArgs e)
         {
             BtnEdit_Click(sender, e);
+        }
+
+        private void BtnFile_Click(object sender, ExecutedRoutedEventArgs e)
+        {
+            BtnSaveTags.Visibility = Visibility.Hidden;
+            OpenCmdExecuted(sender, e);
         }
     }
 }
