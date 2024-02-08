@@ -8,6 +8,9 @@
         Title="Xiaoxia MP3 Player" Height="460" Width="764">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" 	Executed="OpenCmdExecuted" 	CanExecute="OpenCmdCanExecute"/>
+        <CommandBinding Command="MediaCommands.Play" Executed="PlayMedia" CanExecute="CanPlayMedia"/>
+        <CommandBinding Command="MediaCommands.Pause" Executed="PauseMedia" CanExecute="CanPauseMedia"/>
+        <CommandBinding Command="MediaCommands.Stop" Executed="StopMedia" CanExecute="CanStopMedia"/>
     </Window.CommandBindings>
     <StackPanel Orientation="Vertical">
         <MediaElement x:Name="Player" LoadedBehavior="Manual"></MediaElement>
@@ -25,11 +28,11 @@
                     <MenuItem Header="Edit" />
                 </MenuItem>
                 <MenuItem Header="Media" Width="60" Margin="5">
-                    <MenuItem Header="Play" />
+                    <MenuItem Header="Play" Command="MediaCommands.Play" />
                     <Separator />
-                    <MenuItem Header="Pause" />
+                    <MenuItem Header="Pause" Command="MediaCommands.Pause"/>
                     <Separator />
-                    <MenuItem Header="Stop" />
+                    <MenuItem Header="Stop" Command="MediaCommands.Stop" />
                 </MenuItem>
             </Menu>
         </StackPanel>

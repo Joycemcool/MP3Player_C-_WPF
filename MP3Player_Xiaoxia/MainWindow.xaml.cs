@@ -110,6 +110,7 @@ namespace MP3Player_Xiaoxia
         {
             if (Player.Source != null && Player.NaturalDuration.HasTimeSpan && !isUserDraggingSlider)
             {
+                ProgressSlider.Minimum= 0;
                 ProgressSlider.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
                 ProgressSlider.Value = Player.Position.TotalSeconds;
             }
@@ -173,10 +174,6 @@ namespace MP3Player_Xiaoxia
             var genre = tfile.Tag.Genres.ToString();
 
 
-            //Image image = tfile.Tag.Picture;
-            //tfile.Save(); 
-
-
         }
 
         private void PropertiesBtn_Click(object sender, RoutedEventArgs e)
@@ -204,8 +201,6 @@ namespace MP3Player_Xiaoxia
             }
         }
 
-
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Player.Stop();
@@ -224,6 +219,37 @@ namespace MP3Player_Xiaoxia
         private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             MenuFile_Click(sender, e);
+        }
+
+        private void CanPlayMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (Player != null) && (Player.Source != null);
+        }
+
+        private void PlayMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Play();
+            isPlaying = true;
+        }
+
+        private void CanPauseMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute= isPlaying;
+        }
+
+        private void PauseMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Pause();
+        }
+
+        private void CanStopMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = isPlaying;
+        }
+
+        private void StopMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Stop();
         }
     }
 }
