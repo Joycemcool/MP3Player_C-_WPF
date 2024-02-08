@@ -215,5 +215,15 @@ namespace MP3Player_Xiaoxia
             tfile.Tag.Title = mp3Title;
             tfile.Save();
         }
+
+        private void OpenCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+           e.CanExecute = true;
+        }
+
+        private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MenuFile_Click(sender, e);
+        }
     }
 }

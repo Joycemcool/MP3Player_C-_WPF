@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:MP3Player_Xiaoxia"
         mc:Ignorable="d"
         Title="Xiaoxia MP3 Player" Height="460" Width="764">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" 	Executed="OpenCmdExecuted" 	CanExecute="OpenCmdCanExecute"/>
+    </Window.CommandBindings>
     <StackPanel Orientation="Vertical">
         <MediaElement x:Name="Player" LoadedBehavior="Manual"></MediaElement>
 
