@@ -4,17 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MP3Player_Xiaoxia"
-             mc:Ignorable="d" Height="358" Width="482">
+             mc:Ignorable="d" Height="358" Width="582">
     <Grid Background="White">
-        <StackPanel Margin="228,-20,10,18" >
+        <StackPanel Margin="214,-51,10,111" >
             <Ellipse Grid.Column="1"  HorizontalAlignment="Left" Height="169" Margin="60,92,0,0" Width="169" Panel.ZIndex="-1">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/Tailor.jpg"/>
                 </Ellipse.Fill>
             </Ellipse>
         </StackPanel>
-        <local:DisplayingTags x:Name="Title" Margin="45,130,259,179"/>
-        <local:DisplayingTags x:Name="Album" Margin="45,197,259,110"/>
-        <local:DisplayingTags x:Name="Year" Margin="45,57,259,252"/>
+        <local:DisplayingTags x:Name="Year" Margin="10,144,339,165" />
+        <local:DisplayingTags x:Name="Title" Margin="10,62,322,247" />
+        <local:DisplayingTags x:Name="Album" Margin="10,225,218,84" />
     </Grid>
 </UserControl>

@@ -17,7 +17,7 @@
         <StackPanel HorizontalAlignment="Left">
             <Menu x:Name="menu" Height="33" HorizontalAlignment="Left" Width="800">
                 <MenuItem x:Name="MenuFile" Header="File" Width="60" Margin="5" >
-                    <MenuItem x:Name="MenuItemOpen" Command="ApplicationCommands.Open" Header="Open MP3" />
+                    <MenuItem x:Name="MenuFileOpen" Command="ApplicationCommands.Open" Header="Open MP3" />
                     <Separator />
                     <MenuItem x:Name="MenuCurrentTags" Header="Tag Current MP3" Click="BtnPlay_Click" />
                     <Separator />
@@ -82,6 +82,7 @@
                             <ImageBrush ImageSource="/stop-icon.png"/>
                         </Button.Background>
                     </Button>
+                   
                     <Label x:Name="LblTime" Width="76" Content="00:00:00" Margin="20,0,0,0" RenderTransformOrigin="0.5,0.5" Height="30" >
                         <Label.RenderTransform>
                             <TransformGroup>

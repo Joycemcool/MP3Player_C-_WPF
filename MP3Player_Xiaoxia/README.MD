@@ -39,7 +39,6 @@ Min Size 6 → ######Heading 6
 ### This project includes the following technical specs:
 -   WPF application using XAML and C#.
 -   Use CommandBindings for the media and application controls (ApplicationCommands (ex. Copy, Paste, Close, Redo, Save),MediaCommands (ex. Play, Stop, Pause, IncreaseVolume, NextTrack))
-
 -   Use at least one User Control (Suggested use: Now Playing and/or Tag Editor screens, now playing)
 -   Use at least three layout managers to create an intuitive and flexible user interface.
 	- StackPanel, Grid,DockPanel

@@ -31,7 +31,7 @@ namespace MP3Player_Xiaoxia
         private TagLib.File tfile;
         string? mp3Title;
         string? album;
-        string year;
+        string? year;
         private bool isPlaying=false;
         private bool isUserDraggingSlider=false;
         private NowPlaying nowPlaying;
@@ -52,11 +52,101 @@ namespace MP3Player_Xiaoxia
         }
 
         //switch nowPlaying and edit window
+
+        private void BtnFile_Click(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                BtnSaveTags.Visibility = Visibility.Hidden;
+                OpenCmdExecuted(sender, e);
+            }
+            catch (FileFormatException ex) {
+                Console.WriteLine(ex.Message.ToString());
+            }
+
+        }
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
- 
-            CC.Content = nowPlaying;
-            BtnSaveTags.Visibility = Visibility.Visible;
+            try
+            {
+                if (nowPlaying != null)
+                {
+                    CC.Content = nowPlaying;
+                    BtnSaveTags.Visibility = Visibility.Hidden;
+                    Set_NowPlayingTags();
+                    PlayPanel.Visibility = Visibility.Visible;
+                }
+            } catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+
+        }
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (editTags != null)
+            {
+                Player.Stop();
+                PlayPanel.Visibility = Visibility.Hidden;
+                isPlaying = false;
+                Player.Source = null;//after this edit, set it back
+                BtnSaveTags.Visibility = Visibility.Visible;
+                CC.Content = editTags;
+            }
+            if(filePath != null)
+            {
+                Player.Source = new Uri(filePath);
+            }
+        }
+
+        private void BtnSaveTags_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Player.Source = null;
+                Get_Tags(sender, e);
+                mp3Title = editTags.Title.TagValue.Text.ToString();
+                album = editTags.Album.TagValue.Text.ToString();
+                year = editTags.Year.TagValue.Text.ToString();
+                if (mp3Title.Length > 0 || album.Length > 0 || year != null)
+                {
+                    tfile.Tag.Title = mp3Title;
+                    tfile.Tag.Album = album;
+                    tfile.Tag.Year = UInt32.Parse(year);
+                    tfile.Save();
+                }
+                Set_EditTags();
+                Player.Source = new Uri(filePath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+
+
+        }
+
+        private void MenuExit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void MenuEdit_Click(object sender, RoutedEventArgs e)
+        {
+            BtnEdit_Click(sender, e);
+        }
+
+        //get and set tags for the controls
+        private void Get_Tags(object sender, RoutedEventArgs e)
+        {
+            tfile = TagLib.File.Create(MediaOpenDialog.FileName);      
+            mp3Title = tfile.Tag.Title.ToString();
+            album = tfile.Tag.Album.ToString();
+            year = tfile.Tag.Year.ToString();
+        }
+
+        private void Set_NowPlayingTags()
+        {
             nowPlaying.Title.TagHeader.Content = "Title";
             nowPlaying.Album.TagHeader.Content = "Album";
             nowPlaying.Year.TagHeader.Content = "Year";
@@ -64,15 +154,15 @@ namespace MP3Player_Xiaoxia
             nowPlaying.Album.TagValue.Content = album;
             nowPlaying.Year.TagValue.Content = year;
         }
-
-
-        private void Get_Tags(object sender, RoutedEventArgs e)
+        private void Set_EditTags()
         {
-            tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-      
-            mp3Title = tfile.Tag.Title.ToString();
-            album = tfile.Tag.Album.ToString();
-            year = tfile.Tag.Year.ToString();
+            editTags.Title.TagHeader.Content = "Title";
+            editTags.Album.TagHeader.Content = "Album";
+            editTags.Year.TagHeader.Content = "Year";
+            editTags.Title.TagValue.Text = mp3Title;
+            editTags.Album.TagValue.Text = album;
+            editTags.Year.TagValue.Text = year;
+            tfile.Dispose();
         }
 
         //CommandBinding
@@ -92,19 +182,15 @@ namespace MP3Player_Xiaoxia
                 filePath = MediaOpenDialog.FileName;
                 fileName = MediaOpenDialog.SafeFileName;
                 nowPlaying = new NowPlaying();
+                editTags = new EditTags();
+                Get_Tags(sender, e);
+                Set_NowPlayingTags();
+                Set_EditTags();
                 CC.Content = nowPlaying;
                 PlayPanel.Visibility = Visibility.Visible;
-
-                Get_Tags(sender, e);
-                nowPlaying.Title.TagValue.Content = mp3Title;
-                //if (mp3Title != null)
-                //{
-                //    nowPlaying.Title.TagValue.Content = mp3Title;
-                //}
-
                 Player.Source = new Uri(filePath);
-
                 PlayMedia(sender, e);
+                isPlaying = true;
 
             }
         }
@@ -116,33 +202,31 @@ namespace MP3Player_Xiaoxia
 
         private void PlayMedia(object sender, ExecutedRoutedEventArgs e)
         {
+            BtnPlay_Click(sender, e);
             BtnSaveTags.Visibility= Visibility.Hidden;
             Player.Play();
             isPlaying = true;
-            nowPlaying.Title.TagHeader.Content = "Title";
-            nowPlaying.Album.TagHeader.Content = "Album";
-            nowPlaying.Year.TagHeader.Content = "Year";
-            nowPlaying.Title.TagValue.Content = mp3Title;
-            nowPlaying.Album.TagValue.Content = album;
-            nowPlaying.Year.TagValue.Content = year;
         }
 
         private void CanPauseMedia(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = isPlaying;
-            //e.CanExecute= true;
+            //e.CanExecute = isPlaying;
+            e.CanExecute = true;
         }
 
         private void PauseMedia(object sender, ExecutedRoutedEventArgs e)
         {
-            Player.Pause();
-            //isPlaying= false;
+            if (isPlaying)
+            {
+              Player.Pause();
+            }
+
+            isPlaying = false;
         }
 
         private void CanStopMedia(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = isPlaying;
-            //e.CanExecute = true;
+            e.CanExecute = true;
         }
 
         private void StopMedia(object sender, ExecutedRoutedEventArgs e)
@@ -151,24 +235,8 @@ namespace MP3Player_Xiaoxia
             //isPlaying = false;
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            Player.Stop();
-            PlayPanel.Visibility= Visibility.Hidden;
-            isPlaying = false;
-            Player.Source = null;
-            editTags = new EditTags();
-            BtnSaveTags.Visibility = Visibility.Visible;
-            CC.Content = editTags;
-            editTags.Title.TagHeader.Content = "Title";
-            editTags.Album.TagHeader.Content = "Album";
-            editTags.Year.TagHeader.Content = "Year";
-            editTags.Title.TagValue.Text = mp3Title;
-            editTags.Album.TagValue.Text = album;
-            editTags.Year.TagValue.Text = year;
-            tfile.Dispose();          
-        }
-        //#region Media Controls
+
+        //progressBar setting
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -204,35 +272,7 @@ namespace MP3Player_Xiaoxia
         }
 
 
-        private void BtnSaveTags_Click(object sender, RoutedEventArgs e)
-        {
-            mp3Title = editTags.Title.TagValue.Text.ToString();
-            album = editTags.Album.TagValue.Text.ToString();
-            year = editTags.Year.TagValue.Text.ToString();
-            if (mp3Title.Length > 0 || album.Length >0 || year !=null)
-            {
-                tfile.Tag.Title = mp3Title;
-                tfile.Tag.Album = album;
-                tfile.Tag.Year = UInt32.Parse(year);
-                tfile.Save();
-            }
 
-        }
 
-        private void MenuExit_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-
-        private void MenuEdit_Click(object sender, RoutedEventArgs e)
-        {
-            BtnEdit_Click(sender, e);
-        }
-
-        private void BtnFile_Click(object sender, ExecutedRoutedEventArgs e)
-        {
-            BtnSaveTags.Visibility = Visibility.Hidden;
-            OpenCmdExecuted(sender, e);
-        }
     }
 }

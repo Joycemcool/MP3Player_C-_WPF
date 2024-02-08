@@ -4,10 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MP3Player_Xiaoxia"
-             mc:Ignorable="d" Height="70
-" Width="390">
+             mc:Ignorable="d" Height="70" Width="590">
     <Grid Background="White" Margin="0,10,10,0" >
-        <Label x:Name="TagHeader" Content="Meta-Header" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Top" Width="165" Height="36" />
-        <TextBox x:Name="TagValue" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="Meta-Value" Width="380" Height="36"  TextChanged="TextBox_TextChanged" Margin="0,24,0,0" BorderBrush="{x:Null}"/>
+        <Label x:Name="TagHeader" Content="Meta-Header" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Top" Width="165" Height="36" FontWeight="UltraBold" />
+        <TextBox x:Name="TagValue" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="Meta-Value" Width="580" Height="36"  TextChanged="TextBox_TextChanged" Margin="0,24,0,0" BorderBrush="{x:Null}"/>
     </Grid>
 </UserControl>
