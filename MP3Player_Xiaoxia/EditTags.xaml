@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:MP3Player_Xiaoxia"
              mc:Ignorable="d" 
              d:DesignHeight="358" d:DesignWidth="482">
-    <Grid  Background="#FFFBE8E8"  >
-        <local:EditMetaDataControl x:Name="Title"  Margin="30,88,29,159"></local:EditMetaDataControl>
+    <Grid  >
+        <local:EditMetaDataControl x:Name="Title"  Margin="46,98,46,190"></local:EditMetaDataControl>
+        <local:EditMetaDataControl x:Name="Album"  Margin="46,160,46,128"></local:EditMetaDataControl>
+        <local:EditMetaDataControl x:Name="Year"  Margin="46,10,46,223"></local:EditMetaDataControl>
+
     </Grid>
 </UserControl>

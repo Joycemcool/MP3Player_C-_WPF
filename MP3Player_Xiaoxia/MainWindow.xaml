@@ -17,14 +17,14 @@
 
         <StackPanel HorizontalAlignment="Left">
             <Menu x:Name="menu" Height="33" HorizontalAlignment="Left" Width="800">
-                <MenuItem x:Name="MenuFile" Header="File" Width="60" Margin="5" Click="MenuFile_Click">
-                    <MenuItem x:Name="MenuItemOpen" Header="Open MP3" />
+                <MenuItem x:Name="MenuFile" Header="File" Width="60" Margin="5" >
+                    <MenuItem x:Name="MenuItemOpen" Command="ApplicationCommands.Open" Header="Open MP3" />
                     <Separator />
-                    <MenuItem Header="Tag Current MP3" />
+                    <MenuItem x:Name="MenuCurrentTags" Header="Tag Current MP3" />
                     <Separator />
-                    <MenuItem Header="Exit" />
+                    <MenuItem x:Name="MenuExit" Header="Exit" Click="MenuExit_Click"/>
                 </MenuItem>
-                <MenuItem Header="Edit" Width="60" Margin="5">
+                <MenuItem Header="Edit" Width="60" Margin="5" Click="MenuItem_Click">
                     <MenuItem Header="Edit" />
                 </MenuItem>
                 <MenuItem Header="Media" Width="60" Margin="5">
@@ -38,10 +38,11 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="414" Width="761">
             <StackPanel Background="#FF98E0CE" Height="406" Width="111" HorizontalAlignment="Left">
-                <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60" Click="BtnFile_Click">
+                <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60"  Command="ApplicationCommands.Open" Width="89">
                     <Button.Background>
                         <ImageBrush ImageSource="/open_file.png" Stretch="Fill"/>
                     </Button.Background>
+
                 </Button>
                 <Button x:Name="BtnPlay" BorderBrush="{x:Null}" Height="60" Click="BtnPlay_Click" >
                     <Button.Background>
@@ -54,16 +55,11 @@
                     </Button.Background>
 
                 </Button>
-                <Label x:Name="LblTest" Content="Label"/>
-                <Button Content="Button" Click="Button_Click_1"/>
 
             </StackPanel>
-            <!--<StackPanel>
-                <Label Content="right"></Label>
-            </StackPanel>-->
             <Grid Height="400">
                 <ContentControl x:Name="CC"></ContentControl>
-                <DockPanel x:Name="PlayPanel" Background="#FF0096B3" Width="598" Margin="0,331,0,14" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" >
+                <DockPanel x:Name="PlayPanel" Background="#FF0096B3" Width="598" Margin="18,331,-18,24" RenderTransformOrigin="0.5,0.5"   >
                     <DockPanel.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="-1"/>
@@ -72,26 +68,37 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </DockPanel.RenderTransform>
-                    <Button x:Name="btnPlay"  Width="60" HorizontalAlignment="Left" Click="btnPlay_Click" >
+                    <Button x:Name="btnPlay" Command="MediaCommands.Play" Width="60" HorizontalAlignment="Left" >
                         <Button.Background>
                             <ImageBrush ImageSource="/media-play.png"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="btnPause" Width="60" Click="btnPause_Click"  >
+                    <Button x:Name="btnPause" Command="MediaCommands.Pause" Width="60">
                         <Button.Background>
                             <ImageBrush ImageSource="/pause-icon.png"/>
                         </Button.Background>
 
                     </Button>
-                    <Button x:Name="btnStop" Width="49" Click="btnStop_Click" >
+                    <Button x:Name="btnStop" Command="MediaCommands.Stop" Width="49" >
                         <Button.Background>
                             <ImageBrush ImageSource="/stop-icon.png"/>
                         </Button.Background>
                     </Button>
-                    <Label x:Name="LblTime" Width="79" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,0,0" />
-                    <Slider x:Name="ProgressSlider" Width="100" Thumb.DragStarted="ProgressSlider_DragStarted"  Thumb.DragCompleted="ProgressSlider_DragCompleted_1" ValueChanged="ProgressSlider_ValueChanged"/>
+                    <Label x:Name="LblTime" Width="76" Content="00:00:00" Margin="20,0,0,0" RenderTransformOrigin="0.5,0.5" Height="30" >
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180.866"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Slider x:Name="ProgressSlider" Margin="0 12" Width="320" Thumb.DragStarted="ProgressSlider_DragStarted"  Thumb.DragCompleted="ProgressSlider_DragCompleted_1" ValueChanged="ProgressSlider_ValueChanged"/>
 
                 </DockPanel>
+                <Button x:Name="BtnSaveTags" Content="Save" Visibility="Hidden" Click="Button_Click_1" HorizontalContentAlignment="Right" Margin="498,253,20,103" FontSize="16" FontWeight="SemiBold" Grid.IsSharedSizeScope="True" HorizontalAlignment="Center" Padding="10,10,10,10"/>
+
             </Grid>
 
         </StackPanel>

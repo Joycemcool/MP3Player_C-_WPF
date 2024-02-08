@@ -45,33 +45,43 @@ namespace MP3Player_Xiaoxia
         public MainWindow()
         {
             InitializeComponent();
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
+        //switch nowPlaying and edit window
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
-            
+ 
             CC.Content = nowPlaying;
-            nowPlaying.Title.TagHeader.Content = "title";
-            //CC.Content = new NowPlaying();
+            nowPlaying.Title.TagHeader.Content = "Title";
+            nowPlaying.Album.TagHeader.Content = "Album";
+            nowPlaying.Year.TagHeader.Content = "Year";
+            nowPlaying.Title.TagValue.Content = mp3Title;
+            nowPlaying.Album.TagValue.Content = album;
+            nowPlaying.Year.TagValue.Content = year;
         }
 
-        private void MenuFile_Click(object sender, RoutedEventArgs e)
-        {
-            BtnFile_Click(sender, e);
-        }
 
         private void Get_Tags(object sender, RoutedEventArgs e)
         {
             tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-            //tfile = TagLib.File.Create(@"C:\Users\joyce\Documents\ComeAlive.mp3");
-       
+      
             mp3Title = tfile.Tag.Title.ToString();
+            album = tfile.Tag.Album.ToString();
+            year = tfile.Tag.Year.ToString();
         }
-        private void BtnFile_Click(object sender, RoutedEventArgs e)
-        {
 
+        //CommandBinding
+
+        private void OpenCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
             MediaOpenDialog.Multiselect = false;
             bool? success = MediaOpenDialog.ShowDialog();
             if (success == true)
@@ -83,26 +93,72 @@ namespace MP3Player_Xiaoxia
                 PlayPanel.Visibility = Visibility.Visible;
 
                 Get_Tags(sender, e);
-                if (mp3Title != null)
-                {
-                    nowPlaying.Title.TagValue.Content = mp3Title;
-                }
+                nowPlaying.Title.TagValue.Content = mp3Title;
+                //if (mp3Title != null)
+                //{
+                //    nowPlaying.Title.TagValue.Content = mp3Title;
+                //}
 
-                btnPlay_Click(sender, e);
+                Player.Source = new Uri(filePath);
+
+                PlayMedia(sender, e);
 
             }
-            else
-            {
-                //didn't pick a file
-            }
+        }
+
+        private void CanPlayMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (Player != null) && (Player.Source != null) ;
+        }
+
+        private void PlayMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Play();
+            isPlaying = true;
+            nowPlaying.Title.TagHeader.Content = "Title";
+            nowPlaying.Album.TagHeader.Content = "Album";
+            nowPlaying.Year.TagHeader.Content = "Year";
+            nowPlaying.Title.TagValue.Content = mp3Title;
+            nowPlaying.Album.TagValue.Content = album;
+            nowPlaying.Year.TagValue.Content = year;
+        }
+
+        private void CanPauseMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = isPlaying;
+        }
+
+        private void PauseMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Pause();
+            //isPlaying= false;
+        }
+
+        private void CanStopMedia(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = isPlaying;
+        }
+
+        private void StopMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            Player.Stop();
+            //isPlaying = false;
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             Player.Stop();
+            Player.Source = null;
             editTags = new EditTags();
+            BtnSaveTags.Visibility = Visibility.Visible;
             CC.Content = editTags;
-            tfile.Dispose( );
+            editTags.Title.TagHeader.Content = "Title";
+            editTags.Album.TagHeader.Content = "Album";
+            editTags.Year.TagHeader.Content = "Year";
+            editTags.Title.TagValue.Text = mp3Title;
+            editTags.Album.TagValue.Text = album;
+            editTags.Year.TagValue.Text = year;
+            tfile.Dispose();          
         }
         //#region Media Controls
 
@@ -116,29 +172,6 @@ namespace MP3Player_Xiaoxia
             }
         }
 
-        #region Media Controls
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
-        {
-
-            Player.Source = new Uri(filePath);
-
-                Player.Play();
-                isPlaying = true;
-                //need a default value for label
-
-        }
-
-        private void btnPause_Click(object sender, RoutedEventArgs e)
-        {
-            Player.Pause();
-            isPlaying = false;
-        }
-
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            Player.Stop();
-            isPlaying = false;
-        }
 
         private void ProgressSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
@@ -152,7 +185,7 @@ namespace MP3Player_Xiaoxia
         }
         private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            LblTime.Content = TimeSpan.FromSeconds(ProgressSlider.Value).ToString(@"hh\:mm\:ss");
+            LblTime.Content = TimeSpan.FromSeconds(ProgressSlider.Value).ToString(@"hh\:mm\:ss"); //number upside down
 
         }
 
@@ -162,94 +195,26 @@ namespace MP3Player_Xiaoxia
             Player.Position = TimeSpan.FromSeconds(ProgressSlider.Value);
         }
 
-        //Play and pause funcion
-        #endregion
-
-        private void Show_Properties(object sender, RoutedEventArgs e)
-        {
-            var tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-            var title = tfile.Tag.Title.ToString();
-            var album = tfile.Tag.Album.ToString();
-            var year = tfile.Tag.Year.ToString();
-            var genre = tfile.Tag.Genres.ToString();
-
-
-        }
-
-        private void PropertiesBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (MediaOpenDialog.FileName != "")
-            {
-                var tfile = TagLib.File.Create(MediaOpenDialog.FileName);
-                StringBuilder sb = new();
-
-                sb.AppendLine("Duration: " + tfile.Properties.Duration.ToString(@"hh\:mm\:ss"));
-
-                if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Audio))
-                {
-                    sb.AppendLine("Audio bitrate: " + tfile.Properties.AudioBitrate);
-                    sb.AppendLine("Audio sample rate: " + tfile.Properties.AudioSampleRate);
-                    sb.AppendLine("Audio channels: " + (tfile.Properties.AudioChannels == 1 ? "Mono" : "Stereo"));
-                }
-
-                if (tfile.Properties.MediaTypes.HasFlag(TagLib.MediaTypes.Video))
-                {
-                    sb.AppendLine($"Video resolution: {tfile.Properties.VideoWidth} x {tfile.Properties.VideoHeight}");
-                }
-
-                MessageBox.Show(sb.ToString(), "Properties");
-            }
-        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Player.Stop();
-            
-            Player.Source=null;
-            mp3Title = editTags.Title.TextBoxMetaValue.Text.ToString();
-            tfile.Tag.Title = mp3Title;
-            tfile.Save();
+            mp3Title = editTags.Title.TagValue.Text.ToString();
+            if(mp3Title.Length > 0)
+            {
+                tfile.Tag.Title = mp3Title;
+                tfile.Save();
+            }
+
         }
 
-        private void OpenCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void MenuExit_Click(object sender, RoutedEventArgs e)
         {
-           e.CanExecute = true;
+            System.Windows.Application.Current.Shutdown();
         }
 
-        private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MenuFile_Click(sender, e);
-        }
-
-        private void CanPlayMedia(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (Player != null) && (Player.Source != null);
-        }
-
-        private void PlayMedia(object sender, ExecutedRoutedEventArgs e)
-        {
-            Player.Play();
-            isPlaying = true;
-        }
-
-        private void CanPauseMedia(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute= isPlaying;
-        }
-
-        private void PauseMedia(object sender, ExecutedRoutedEventArgs e)
-        {
-            Player.Pause();
-        }
-
-        private void CanStopMedia(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = isPlaying;
-        }
-
-        private void StopMedia(object sender, ExecutedRoutedEventArgs e)
-        {
-            Player.Stop();
+            BtnEdit_Click(sender, e);
         }
     }
 }

@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:MP3Player_Xiaoxia"
              mc:Ignorable="d" Height="358" Width="482">
     <Grid Background="White">
-        <local:DisplayingTags x:Name="Title" Margin="45,87,273,174"/>
-
-        <StackPanel Margin="148,-20,10,18" >
-            <Ellipse Grid.Column="1"  HorizontalAlignment="Left" Height="169" Margin="60,92,0,0" VerticalAlignment="Top" Width="169" Panel.ZIndex="-1">
+        <StackPanel Margin="228,-20,10,18" >
+            <Ellipse Grid.Column="1"  HorizontalAlignment="Left" Height="169" Margin="60,92,0,0" Width="169" Panel.ZIndex="-1">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/Tailor.jpg"/>
                 </Ellipse.Fill>
             </Ellipse>
         </StackPanel>
+        <local:DisplayingTags x:Name="Title" Margin="45,130,259,179"/>
+        <local:DisplayingTags x:Name="Album" Margin="45,197,259,110"/>
+        <local:DisplayingTags x:Name="Year" Margin="45,57,259,252"/>
     </Grid>
 </UserControl>
