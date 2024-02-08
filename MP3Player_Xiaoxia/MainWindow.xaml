@@ -39,17 +39,17 @@
             <StackPanel Background="#FF98E0CE" Height="406" Width="111" HorizontalAlignment="Left">
                 <Button x:Name="BtnFile" BorderBrush="{x:Null}" Height="60"  Command="ApplicationCommands.Open" Width="91">
                     <Button.Background>
-                        <ImageBrush ImageSource="/open_file.png" Stretch="Fill"/>
+                        <ImageBrush ImageSource="/images/open_file.png" Stretch="Fill"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="BtnPlay" BorderBrush="{x:Null}" Height="60" Click="BtnPlay_Click" >
                     <Button.Background>
-                        <ImageBrush ImageSource="/musicnote.png"/>
+                        <ImageBrush ImageSource="/images/musicnote.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="BtnEdit" Content="" BorderBrush="{x:Null}" Height="60" Click="BtnEdit_Click" >
                     <Button.Background>
-                        <ImageBrush ImageSource="/edit.png"/>
+                        <ImageBrush ImageSource="/images/edit.png"/>
                     </Button.Background>
 
                 </Button>
@@ -68,18 +68,18 @@
                     </DockPanel.RenderTransform>
                     <Button x:Name="btnPlay" Command="MediaCommands.Play" Width="60" HorizontalAlignment="Left" >
                         <Button.Background>
-                            <ImageBrush ImageSource="/media-play.png"/>
+                            <ImageBrush ImageSource="/images/media-play.png"/>
                         </Button.Background>
                     </Button>
                     <Button x:Name="btnPause" Command="MediaCommands.Pause" Width="60">
                         <Button.Background>
-                            <ImageBrush ImageSource="/pause-icon.png"/>
+                            <ImageBrush ImageSource="/images/pause-icon.png"/>
                         </Button.Background>
 
                     </Button>
                     <Button x:Name="btnStop" Command="MediaCommands.Stop" Width="49" >
                         <Button.Background>
-                            <ImageBrush ImageSource="/stop-icon.png"/>
+                            <ImageBrush ImageSource="/images/stop-icon.png"/>
                         </Button.Background>
                     </Button>
                    

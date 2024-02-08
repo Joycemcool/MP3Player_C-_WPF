@@ -9,7 +9,7 @@
         <StackPanel Margin="214,-51,10,111" >
             <Ellipse Grid.Column="1"  HorizontalAlignment="Left" Height="169" Margin="60,92,0,0" Width="169" Panel.ZIndex="-1">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="/Tailor.jpg"/>
+                    <ImageBrush ImageSource="/images/Tailor.jpg"/>
                 </Ellipse.Fill>
             </Ellipse>
         </StackPanel>

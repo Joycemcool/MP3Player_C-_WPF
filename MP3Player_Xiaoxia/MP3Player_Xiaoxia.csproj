@@ -9,12 +9,19 @@
 
   <ItemGroup>
     <None Remove="edit.png" />
-    <None Remove="media-play.png" />
-    <None Remove="musicnote.png" />
-    <None Remove="open_file.png" />
-    <None Remove="pause-icon.png" />
-    <None Remove="stop-icon.png" />
+    <None Remove="images\edit.png" />
+    <None Remove="images\File-Menu.png" />
+    <None Remove="images\Media-Menu.png" />
+    <None Remove="images\media-play.png" />
+    <None Remove="images\musicnote.png" />
+    <None Remove="images\open_file.png" />
+    <None Remove="images\pause-icon.png" />
+    <None Remove="images\stop-icon.png" />
     <None Remove="Tailor.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\open_file.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,13 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="edit.png" />
-    <Resource Include="media-play.png" />
-    <Resource Include="musicnote.png" />
-    <Resource Include="open_file.png" />
-    <Resource Include="pause-icon.png" />
-    <Resource Include="stop-icon.png" />
-    <Resource Include="Tailor.jpg" />
+    <Resource Include="images\edit.png" />
+    <Resource Include="images\File-Menu.png" />
+    <Resource Include="images\Media-Menu.png" />
+    <Resource Include="images\media-play.png" />
+    <Resource Include="images\musicnote.png" />
+    <Resource Include="images\pause-icon.png" />
+    <Resource Include="images\stop-icon.png" />
+    <Resource Include="images\Tailor.jpg" />
   </ItemGroup>
 
 </Project>
